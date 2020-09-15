@@ -11,6 +11,7 @@ services:
       - "3011:3011"
     environment:
       - MONGODB_URI=mongodb://mongo:27017
+      - LOGSTASH_URI=http://elk:9200/_bulk
       - PORT=3011
   helper:
     build: 
@@ -18,3 +19,9 @@ services:
       dockerfile: Dockerfile-pathfinder
     depends_on: 
       - undebate
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
